@@ -33,3 +33,5 @@ ng versión
 ```
 # Integrantes
 - Natalia Lozano: Actualmente hago parte de una empresa dedicada al desarrollo de aplicaciones web.
+
+- Santiago Durán Mora: Ingeniero Industrial graduado de la Universidad Distrital, tengo 26 años y vivo actualmente en Bogotá. Tengo experiencia en planificación, desplieque y seguimiento a Sistemas de Gestión Integrado en el sector público.

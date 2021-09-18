@@ -39,3 +39,5 @@ ng versión
 - Nicolas Escobar Tellez: Estudiante de ultimo semestre de Ingenieria de Software, tengo 22 años, vivo en la ciudad de Neiva y me gusta el desarrollo backend.
 
 - Gustavo Enrique Ramirez Aguilar: Tengo 30 años de edad, padre de una niña de 4 meses, en el momento llevo 2 años viviendo en la Ciudad de Medellin, paramedico de profesion hace mas de 6 años y estudiante de 7 semestre de Ingenieria de Telecomunicaciones de la universidad UNAD, me gusta el futbol  y me gusta mucho el mundo de la programacion.
+
+- Bladimir Lenis Gil: Soy físico con postgrados en Radioquímica y Aplicaciones Nulceares y Física-Médica.  He programado en Matlab y un poco python, el desarrollo web es totalmente nuevo para mi.

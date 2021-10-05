@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="animate/plugins/animate.css">
+    <link rel="stylesheet" href="fonts.css">
+    <title>VentaPrueba</title>
+</head>
+
+<body>
+    <div class="titulo">
+        <caption>
+            <h1 class="t-stroke"></h1>
+            <span class="icon-calculator"></span>
+        </caption>
+    </div>
+    <div id="Padre">
+        <div class="datatable-container">
+
+            <div class="header-tools">
+
+
+                <div class="tools">
+
+
+                    <a href="#" class="button  radius">
+                        <span class="icon-home"></span>Incio
+                    </a>
+                    <a href="#" class="button radius">
+                        <span class="icon-miscellaneous_services"></span>Gestion de Productos
+                    </a>
+                    <a href="#" class="button radius medium">
+                        <span class="icon-group "></span>Gestion de Usuarios y Roles
+                    </a>
+
+                </div>
+
+                <div class="search">
+                    <input type="text" name="" id="" placeholder="Buscar..." class="search-input radius">
+                    <label for="">Seleccione Su Busqueda</label><br>
+                    <input type="checkbox" name="ID Venta" value="s">ID Venta<br>
+                    <input type="checkbox" name="CC Cliente" value="s">CC Cliente<br>
+                    <input type="checkbox" name="Nombre Cliente" value="s">Cliente<br>
+
+                </div>
+
+            </div>
+            <div class="cerrar">
+                <a href="#" class="button  radius">
+                    <span class="icon-group"></span>Cerrar Sesion
+                </a>
+
+            </div>
+            <table class="datatable">
+
+                <thead>
+                    <tr>
+                        <th>ID Venta</th>
+                        <th>Productos</th>
+                        <th>ID Vendedor</th>
+                        <th>Vendedor</th>
+                        <th>Fecha de la Venta</th>
+                        <th>CC Cliente</th>
+                        <th>Cliente</th>
+                        <th>Valor</th>
+                        <th>Editar</th>
+                        <th>Estado de la Venta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>S001</td>
+                        <td>Mueble</td>
+                        <td>V001</td>
+                        <td>Alfredo</td>
+                        <td>22/09/2021</td>
+                        <td>123456789</td>
+                        <td>Vanesa</td>
+                        <td>$300000</td>
+                        <td><button type="text" name="button" id="button" onclick="editar()">Editar</button></td>
+                        <td><select id="Estado de la Venta" class="caja">
+                                <option> Estado de La venta</option>
+                                <option> En proceso</option>
+                                <option> Entregado</option>
+                                <option> Cancelado</option>
+                            </select></td>
+
+                    </tr>
+                    <tr>
+                        <td>S002</td>
+                        <td>Mesa</td>
+                        <td>V001</td>
+                        <td>Bladimir</td>
+                        <td>24/09/2021</td>
+                        <td>4667289</td>
+                        <td>Nicolas</td>
+                        <td>$400000</td>
+                        <td><button type="text" name="button" id="button" onclick="editar()">Editar</button></td>
+                        <td><select id="Estado de la Venta" class="caja">
+                                <option> Estado de La venta</option>
+                                <option> En proceso</option>
+                                <option> Entregado</option>
+                                <option> Cancelado</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td>S003</td>
+                        <td>Computador</td>
+                        <td>V004</td>
+                        <td>Diego</td>
+                        <td>28/09/2021</td>
+                        <td>6578930</td>
+                        <td>Andres</td>
+                        <td>$500000</td>
+                        <td><button type="text" name="button" id="button" onclick="editar()">Editar</button></td>
+                        <td><select id="Estado de la Venta" class="caja">
+                                <option> Estado de La venta</option>
+                                <option> En proceso</option>
+                                <option> Entregado</option>
+                                <option> Cancelado</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td>S004</td>
+                        <td>Televisor</td>
+                        <td>V004</td>
+                        <td>Jordan</td>
+                        <td>30/09/2021</td>
+                        <td>4438892</td>
+                        <td>Pablo</td>
+                        <td>$100000</td>
+                        <td><button type="text" name="button" id="button" onclick="editar()">Editar</button></td>
+                        <td><select id="Estado de la Venta" class="caja">
+                                <option> Estado de La venta</option>
+                                <option> En proceso</option>
+                                <option> Entregado</option>
+                                <option> Cancelado</option>
+                            </select></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="footer-tools">
+
+                <button type="text" name="button" id="button " onclick="agregar()">
+                    <span class="icon-create_new_folder  "></span>Agregar</button>
+
+            </div>
+        </div>
+        <!-- <thead>
+                <div id="div1">
+                <select id="Estado de la Venta" class="caja">
+                    <option> value="">Estado de La venta</option>
+                    <option> value="En proceso">En proceso</option>
+                    <option> value="Entregado">Entregado</option>
+                    <option> value="Cancelado">Cancelado</option>
+                </select>>-->
+    </div>
+
+    <!--  </thead>
+            </div>
+            
+          
+            <table id="info">
+                <thead>
+                    <tr>
+                        <th>ID Venta</th>
+                        <th>Productos</th>
+                        <th>ID Vendedor</th>
+                        <th>Vendedor</th>
+                        <th>Fecha de la Venta</th>
+                        <th>CC Cliente</th>
+                        <th>Cliente</th>
+                        <th>Valor</th>
+                        <th>Editar</th>
+                        <th>Estado de la Venta</th>
+                    
+            </table>-->
+
+    </div>
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.1_AGREGAR_PRODUCTO</title>
+    <<link rel="stylesheet" href="css/Estilos.css">>
+</head>
+
+<body>
+    <div id="MainWindow">
+        <div id="MainTitle">
+            <center>
+                <h1>AGREGAR PRODUCTO </h1>
+            </center>
+            <img src="img/img_mas.png">
+        </div>
+
+        <div id="Tabla">
+            <fieldset>
+                <legend><b></b></legend>
+                <label><b>Nombre del producto:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <input type="text">
+                <br><br>
+
+                <label><b>Valor unitario: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <input type="text">
+                <br><br>
+
+                <label><b>Seleccione el estado del producto:</b>&nbsp;&nbsp;&nbsp;</label>
+                <input type="radio" name="estado" value="activo">
+                <label for="activo">Disponible&nbsp;&nbsp;&nbsp;</label>
+                <input type="radio" name="estado" value="inactivo">
+                <label for="inactivo">No disponible</label>
+                <br><br>
+
+                <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp; </label>
+                <input id="cancelar" type="submit" name="cancelar" value="Cancelar">
+                <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp; </label>
+                <input id="actualizar" type="submit" name="actualizar" value="Crear producto">
+
+            </fieldset>
+        </div>
+    </div>
+
+
+
+    <script src="js/GUI_4_1.js"></script>
+</body>
+
+</html>

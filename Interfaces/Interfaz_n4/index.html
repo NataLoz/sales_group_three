@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/Estilos_4.css">
+</head>
+
+<body>
+    <div id="MainWindow">
+        <div>
+            <img src="img/logo_BaseDatos.png">
+            <center>
+                <h1>Gestión de Productos</h1>
+            </center>
+            <img src="img/Cerrar_sesion.png">
+        </div>
+
+        <ul>
+            <label> 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </label>
+            <li &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; class="inicio">Inicio</li>
+            <li class="gv">Gestión de Ventas</li>
+            <li class="gp">Gestión de Usuarios y Roles</li>
+        </ul>
+
+        <table>
+            <tr>
+                <th>ID Producto</th>
+                <th>Producto</th>
+                <th>ID Vend. / Admon</th>
+                <th>Vendedor / Admon</th>
+                <th>Fecha de ingreso</th>
+                <th>CC Proveedor</th>
+                <th>Proveedor</th>
+                <th>Valor</th>
+                <th>Editar</th>
+                <th>Estado</th>
+            </tr>
+
+            <tr>
+                <td>P0001</td>
+                <td>Muebles</td>
+                <td> V001 </td>
+                <td>Vendedor</td>
+                <td>22/09/2021</td>
+                <td>29.548.152</td>
+                <td>Milena Vargas</td>
+                <td>$ 600.000</td>
+                <td><button>Editar</button></td>
+                <td><select id="Estado" class="caja">
+                    <option> En proceso</option>
+                    <option> Recibido</option>
+                    <option> Cancelado</option>
+                </select></td>
+            </tr>
+
+            <tr>
+                <td>P0002</td>
+                <td>Televisor</td>
+                <td>A001 </td>
+                <td>Administrador</td>
+                <td>26/09/2021</td>
+                <td>37.437.093</td>
+                <td>Milena Carrillo</td>
+                <td>$ 1.500.000</td>
+                <td><button>Editar</button></td>
+                <td><select id="Estado" class="caja">
+                    <option> En proceso</option>
+                    <option> Recibido</option>
+                    <option> Cancelado</option>
+                </select></td>
+            </tr>
+
+            <tr>
+                <td>P0003</td>
+                <td>Abanico</td>
+                <td>V002</td>
+                <td>Vendedor</td>
+                <td>10/10/2021</td>
+                <td>29.548.152</td>
+                <td>Andres Camargo</td>
+                <td>$ 150.000</td>
+                <td><button>Editar</button></td>
+                <td><select id="Estado" class="caja">
+                    <option> En proceso</option>
+                    <option> Recibido</option>
+                    <option> Cancelado</option>
+                </select></td>
+            </tr>
+        </table>
+
+        <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </label>
+        <div id="AgregarProducto">
+            Agregar Producto
+        </div>
+
+    </div>
+
+</body>
+
+</html>

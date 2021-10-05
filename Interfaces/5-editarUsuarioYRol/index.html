@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+    <div>
+        <center>
+            <h1>Editar datos del usuario</h1>
+        </center>
+        <img src="img/lapiz_azul.png">
+    </div>
+
+    <form>
+        <fieldset>
+            <legend><b>Datos</b></legend>
+            <label><b>Nombres:</b>&nbsp;&nbsp;&nbsp;</label>
+            <input type="text">
+            <br><br>
+
+            <label><b>Apellidos:</b>&nbsp;&nbsp;&nbsp;</label>
+            <input type="text">
+            <br><br>
+
+            <label><b>Rol:</b>&nbsp;&nbsp;&nbsp;</label>
+            <select>
+                <option>Seleccione el rol</option>
+                <option>Administrador</option>
+                <option>Vendedor</option>
+            </select>
+            <br><br>
+
+            <label><b>Estado:</b>&nbsp;&nbsp;&nbsp;</label>
+            <input type="radio" name="estado" value="activo">
+            <label for="activo">Activo&nbsp;&nbsp;&nbsp;</label>
+            <input type="radio" name="estado" value="inactivo">
+            <label for="inactivo">Inactivo</label>
+            <br><br>
+
+            <label><b>Fecha de ingreso:</b>&nbsp;&nbsp;&nbsp;</label>
+            <input type="date" name="fechaIngreso" min="0000-01-02">
+            <br><br>
+
+            <input id="cancelar" type="submit" name="cancelar" value="Cancelar">
+            <input id="actualizar" type="submit" name="actualizar" value="Actualizar datos del usuario">
+
+        </fieldset>
+    </form>
+
+
+
+</body>
+
+</html>

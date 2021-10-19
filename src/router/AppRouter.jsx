@@ -12,7 +12,7 @@ export const AppRouter = () => {
                 <Switch>
                     <PublicRoute exact path='/login' component={Login} />
                     <PrivateRoute path='/home' component={ContentRouter} />
-                    <PublicRoute path='/' component={Login} />
+                    <PublicRoute exact path='/' component={Login} />
 
                     <PublicRoute to='/' />
                 </Switch>

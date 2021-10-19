@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import { NavLink } from 'react-router-dom';
 import '../css/home.scss';
 import { User } from '../components/Content/Users/User';
+import { EditUser } from '../components/Content/Users/EditUser';
 import { Rol } from '../components/Content/Roles/Rol';
 import { Menu } from '../components/Menu/Menu';
 import Logo from '../images/logo.jpg';
@@ -11,7 +12,7 @@ export const ContentRouter = () => {
     return (
         <div className="wrapper d-flex align-items-stretch">
             <nav id="sidebar">
-                <div classNameName="p-4 pt-5">
+                <div className="p-4 pt-5">
                     <a href="#"> 
                         <img className="img logo rounded-circle mb-5" src={Logo} />
                     </a>
@@ -35,7 +36,7 @@ export const ContentRouter = () => {
                             <a href="#">Gestion de productos</a>
                         </li>
                         <li className="nav-item">
-                            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Gestion de Usuarios y Roles</a>
+                            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Gestion de Usuarios y Roles</a>
                             <ul className="collapse list-unstyled" id="pageSubmenu">
                                 <li className="nav-item">
                                     <NavLink activeClassName="active" className="nav-link" exact to="/home/User">
@@ -64,6 +65,7 @@ export const ContentRouter = () => {
                 <Switch>
                     <Route exact path="/home/User" component={User} />
                     <Route exact path="/home/Rol" component={Rol} />
+                    <Route exact path="/home/EditUser" component={EditUser} />
                 </Switch>
             </div>
         </div>

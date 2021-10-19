@@ -50,13 +50,15 @@ export const Login = () => {
 
                 auth.setToken(data.token);
                 auth.setUser({ uid: data.uid, name: data.name });
+                history.push('/home');
 
             } else if (status === 201) {
                 swal({
-                    title: "Are you sure?",
+                    title: "Registro exitoso",
                     text: data.msg,
-                    icon: "succes",
+                    icon: "success",
                     dangerMode: true,
+                    confirmButtonText: 'OK'
                 })
             }
 
@@ -66,7 +68,7 @@ export const Login = () => {
             console.log(error.response.status);
             console.log(error.response.data); */
 
-
+            console.log(error);
             if (error.response.status === 401) {
                 swal({
                     title: 'Error',
@@ -87,51 +89,11 @@ export const Login = () => {
 
     }
 
-/*     const googleSignin = async (resp) => {
-        try {
-            const { status, data } = await loginGoogle(resp);
-
-            console.log(status, data);
-            if (status === 200) {
-
-                auth.setToken(data.token);
-                auth.setUser({ uid: data.uid, name: data.name });
-
-            } else if (status === 201) {
-                swal({
-                    title: "Are you sure?",
-                    text: data.msg,
-                    icon: "succes",
-                    dangerMode: true,
-                });
-            }
-        } catch (error) {
-
-            // console.log(error.error);
-
-            if (error.response.status === 401) {
-                swal({
-                    title: 'Error',
-                    text: error.response.data.msg,
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-            } else {
-                swal({
-                    title: 'Error',
-                    text: error.response.data.msg,
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-            }
-        }
-    } */
-
     return (
         <React.Fragment>
             <div className="container">
                 <div className="d-flex justify-content-center h-100">
-                    <div className="card">
+                    <div className="card" id="card">
                         <div className="card-header">
                             <h3>Sign In</h3>
                             <div className="d-flex justify-content-end social_icon">
@@ -179,7 +141,7 @@ export const Login = () => {
                         </div>
                         <GoogleLogin
                             className="btn form-group"
-                            clientId="407857674330-otcplnqid00dearn7c0kclqn65n2k45a.apps.googleusercontent.com"
+                            clientId="55000912305-alve6692sj0jjb6dia5hr7v5o1tqanl0.apps.googleusercontent.com"
                             buttonText="Iniciar sesion con google"
                             onSuccess={responseGoogle}
                             onFailure={responseGoogle}

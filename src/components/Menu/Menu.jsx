@@ -1,17 +1,16 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 export const Menu = () => {
+    const auth = useAuth();
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
-                <button type="button" id="sidebarCollapse" className="btn btn-primary">
-                    <i className="fa fa-bars"></i>
-                    <span className="sr-only">Toggle Menu</span>
-                </button>
-                <button className="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <i className="fa fa-bars"></i>
+                <button className="btn btn-outline-danger" onClick={auth.logout}>
+                    <i className="fas fa-sign-out-alt"></i>
+                    <span> Salir</span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="nav navbar-nav ml-auto">

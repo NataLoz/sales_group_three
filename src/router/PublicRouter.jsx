@@ -15,7 +15,7 @@ const PublicRoute = ({ component: Component, ...rest }) => {
         <Route  {...rest}>
             {!auth.isLogged() ?
                 <Component />
-                : <Redirect to="/login" />
+                : <Redirect to="/home" />
             }
         </Route>
     )

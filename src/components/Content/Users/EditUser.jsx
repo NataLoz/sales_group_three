@@ -16,7 +16,7 @@ export const EditUser = () => {
                     </div>
                     <div className="form-group col-md-6">
                         <label htmlFor="user">user</label>
-                        <input type="text" className="form-control" id="user" />
+                        <input type="text" className="form-control" id="user" value="Hola"/>
                     </div>
                 </div>
                 <div className="form-row">

@@ -3,16 +3,11 @@ import useAuth from '../../../hooks/useAuth';
 import { getUsres } from '../../../services/Users.service';
 import swal from 'sweetalert';
 import axios from 'axios';
-import { Switch, Route } from "react-router-dom";
 import { NavLink } from 'react-router-dom';
 
 export const User = () => {
 
     const auth = useAuth();
-
-    useEffect(() => {
-        getUsers();
-    }, []);
 
     const [users, setusers] = useState([])
 
@@ -48,6 +43,10 @@ export const User = () => {
         }
     }
 
+    useEffect(() => {
+        getUsers();
+    }, []);
+
 
     return (
         <React.Fragment>
@@ -74,11 +73,11 @@ export const User = () => {
                                     <td>{user.email}</td>
                                     <td>{user.rol.name}</td>
                                     <td>
-                                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                            <NavLink class="badge badge-info" exact to="/home/EditUser">
+                                        <div className="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                            <NavLink className="badge badge-info" exact to={`/home/EditUser/${user._id}`}>
                                                 Actualizar
                                             </NavLink>
-                                            <NavLink class="badge badge-danger ml-4" exact to="/home/EditUser">
+                                            <NavLink className="badge badge-danger ml-4" exact to="/home/EditUser">
                                                 Eliminar
                                             </NavLink>
                                         </div>

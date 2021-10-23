@@ -9,6 +9,7 @@ import { Menu } from '../components/Menu/Menu';
 import Logo from '../images/logo.jpg';
 
 export const ContentRouter = () => {
+
     return (
         <div className="wrapper d-flex align-items-stretch">
             <nav id="sidebar">
@@ -65,7 +66,7 @@ export const ContentRouter = () => {
                 <Switch>
                     <Route exact path="/home/User" component={User} />
                     <Route exact path="/home/Rol" component={Rol} />
-                    <Route exact path="/home/EditUser" component={EditUser} />
+                    <Route exact path="/home/EditUser/:id" component={EditUser} />
                 </Switch>
             </div>
         </div>

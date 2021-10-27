@@ -78,7 +78,7 @@ export const Productos = () => {
                                     <td>{producto.estado ? "Disponible" : "No disponible"}</td>
                                     <td>
                                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                            <NavLink class="badge badge-info" exact to="/home/EditProductos">
+                                            <NavLink class="badge badge-info" exact to={`/home/EditProductos/${producto._id}`}>
                                                 Actualizar
                                             </NavLink>
                                             <NavLink class="badge badge-danger ml-4" exact to="/home/EditProductos">

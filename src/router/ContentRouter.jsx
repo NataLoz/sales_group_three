@@ -67,7 +67,7 @@ export const ContentRouter = () => {
                     <Route exact path="/home/EditVentas" component={EditVentas} />
                     <Route exact path="/home/Productos" component={Productos} />
                     <Route exact path="/home/AddProductos" component={AddProductos} />
-                    <Route exact path="/home/EditProductos" component={EditProductos} />
+                    <Route exact path="/home/EditProductos/:id" component={EditProductos} />
                     <Route exact path="/home/User" component={User} />
                     <Route exact path="/home/Rol" component={Rol} />
                     <Route exact path="/home/EditUser/:id" component={EditUser} />

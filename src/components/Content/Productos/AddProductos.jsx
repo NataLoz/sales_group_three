@@ -20,7 +20,7 @@ export const AddProductos = () => {
         try {
             const { data } = await axios({
                 method: 'POST',
-                url: 'http://localhost:4000/api/ciclo3/product/new',
+                url: `${process.env.REACT_APP_API_URL}/product/new`,
                 // headers: {
                 //     'Authorization': `Bearer ${auth.token}`
                 // }

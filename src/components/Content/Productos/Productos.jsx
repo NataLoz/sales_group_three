@@ -19,7 +19,7 @@ export const Productos = () => {
         try {
             const { data } = await axios({
                 method: 'GET',
-                url: 'http://localhost:4000/api/ciclo3/product/',
+                url: `${process.env.REACT_APP_API_URL}/product/`,
                 /* url: `${process.env.EndpointApi}/auth/google/login`, */
                 // headers: {
                 //     'Authorization': `Bearer ${auth.token}`

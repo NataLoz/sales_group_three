@@ -2,50 +2,56 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import swal from 'sweetalert';
 import axios from 'axios';
+import { useParams } from "react-router-dom";
 import { Switch, Route } from "react-router-dom";
 import { NavLink } from 'react-router-dom';
 
 export const EditProductos = () => {
 
-    // const auth = useAuth();
+    const auth = useAuth();
 
-    // useEffect(() => {
-    //     getProductos();
-    // }, []);
+    useEffect(() => {
+        getProductos();
+    }, []);
 
-    // const [productos, setProductos] = useState([])
+    const [productos, setProductos] = useState([])
 
-    // const getProductos = async () => {
-    //     try {
-    //         const { data } = await axios({
-    //             method: 'POST',
-    //             url: 'http://localhost:4000/api/ciclo3/product/new',
-    //             /* url: `${process.env.EndpointApi}/auth/google/login`, */
-    //             // headers: {
-    //             //     'Authorization': `Bearer ${auth.token}`
-    //             // }
-    //         });
-    //         console.log(data);
-    //         setProductos(data.product);
+    const { id } = useParams();
 
-    //     } catch (error) {
-    //         if (error.response.status === 401) {
-    //             swal({
-    //                 title: 'Error',
-    //                 text: error.response.data.msg,
-    //                 icon: 'error',
-    //                 confirmButtonText: 'OK'
-    //             });
-    //         } else {
-    //             swal({
-    //                 title: 'Error',
-    //                 text: error.response.data.msg,
-    //                 icon: 'error',
-    //                 confirmButtonText: 'OK'
-    //             });
-    //         }
-    //     }
-    // }
+
+    const getProductos = async () => {
+        
+        try {
+            const { data } = await axios({
+                method: 'GET',
+                url: 'http://localhost:4000/api/ciclo3/product/'+ id,
+                /* url: `${process.env.EndpointApi}/auth/google/login`, */
+                // headers: {
+                //     'Authorization': `Bearer ${auth.token}`
+                // }
+                data: data
+            });
+            console.log(id);
+            setProductos(data.product);
+
+        } catch (error) {
+            if (error.response.status === 401) {
+                swal({
+                    title: 'Error',
+                    text: error.response.data.msg,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                swal({
+                    title: 'Error',
+                    text: error.response.data.msg,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        }
+    }
 
     return (
         <React.Fragment>
@@ -56,12 +62,12 @@ export const EditProductos = () => {
                 <form>
                     <div class="mb-3">
                         <label for="producto" class="form-label">Nombre del producto:</label>
-                        <input type="text" class="form-control" id="nombreProducto" />
+                        <input type="text" class="form-control" id="nombreProducto" value={productos.nombre}/>
                     </div>
 
                     <div class="mb-3">
                         <label for="valor" class="form-label">Valor unitario:</label>
-                        <input type="text" class="form-control" id="valorUnitario" placeholder="$" />
+                        <input type="text" class="form-control" id="valorUnitario" value={productos.valor} />
                     </div>
 
                     <div class="form-check">

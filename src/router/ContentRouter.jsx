@@ -15,6 +15,7 @@ import { AddVentas } from "../components/Content/Ventas/AddVentas";
 import { EditVentas } from "../components/Content/Ventas/EditVentas";
 
 export const ContentRouter = () => {
+
     return (
         <div className="wrapper d-flex align-items-stretch">
             <nav id="sidebar">
@@ -69,7 +70,7 @@ export const ContentRouter = () => {
                     <Route exact path="/home/EditProductos" component={EditProductos} />
                     <Route exact path="/home/User" component={User} />
                     <Route exact path="/home/Rol" component={Rol} />
-                    <Route exact path="/home/EditUser" component={EditUser} />
+                    <Route exact path="/home/EditUser/:id" component={EditUser} />
                 </Switch>
             </div>
         </div>

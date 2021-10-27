@@ -141,7 +141,7 @@ export const Login = () => {
                         </div>
                         <GoogleLogin
                             className="btn form-group"
-                            clientId="55000912305-alve6692sj0jjb6dia5hr7v5o1tqanl0.apps.googleusercontent.com"
+                            clientId={process.env.REACT_APP_IDOAUTH}
                             buttonText="Iniciar sesion con google"
                             onSuccess={responseGoogle}
                             onFailure={responseGoogle}

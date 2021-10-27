@@ -4,29 +4,33 @@ import swal from 'sweetalert';
 import axios from 'axios';
 import { Switch, Route } from "react-router-dom";
 import { NavLink } from 'react-router-dom';
+import { useForm } from '../../../hooks/useForm';
 
 export const AddProductos = () => {
 
     const auth = useAuth();
 
-    useEffect(() => {
-        getProductos();
-    }, []);
+    const [nombre, setNombre] = useState([])    
+    const [valor, setValor] = useState([])
+    const [estado, setEstado] = useState([])
 
-    const [productos, setProductos] = useState([])
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-    const getProductos = async () => {
         try {
             const { data } = await axios({
                 method: 'POST',
                 url: 'http://localhost:4000/api/ciclo3/product/new',
-                /* url: `${process.env.EndpointApi}/auth/google/login`, */
                 // headers: {
                 //     'Authorization': `Bearer ${auth.token}`
                 // }
+                data: {
+                    nombre: nombre,
+                    valor: valor,
+                    estado: estado
+                }
             });
             console.log(data);
-            setProductos(data.product);
 
         } catch (error) {
             if (error.response.status === 401) {
@@ -47,34 +51,34 @@ export const AddProductos = () => {
         }
     }
 
-
     return (
         <React.Fragment>
             <h2 className="mb-4">Agregar Producto</h2>
             <hr />
             <div className="card col-md-8 mx-auto">
                 <div className="card-body"></div>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div class="mb-3">
                         <label for="producto" class="form-label">Nombre del producto:</label>
-                        <input type="text" class="form-control" id="nombreProducto" />
+                        <input type="text" class="form-control" id="nombreProducto" value={nombre} onChange={(e) => {setNombre(e.target.value);}} />
                     </div>
 
                     <div class="mb-3">
                         <label for="valor" class="form-label">Valor unitario:</label>
-                        <input type="text" class="form-control" id="valorUnitario" placeholder="$" />
+                        <input type="text" class="form-control" id="valorUnitario" placeholder="$" value={valor} onChange={(e) => {setValor(e.target.value);}} />
                     </div>
 
                     <div class="form-check">
                         <label for="estado" class="form-label">Seleccione estado del producto:</label>
+                        {/* <input type="text" class="form-control" id="estado" placeholder="Estado" value={estado} onChange={(e) => {setEstado(e.target.value);}} /> */}
                         <br />
-                        <input class="form-check-input" type="radio" name="estado" id="disponible" />
+                        <input class="form-check-input" type="radio" name="estado" id="disponible" value="1" onChange={(e) => {setEstado(e.target.value);}}/>
                         <label class="form-check-label" for="disponible">
                             Disponible
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="estado" id="noDisponible" checked />
+                        <input class="form-check-input" type="radio" name="estado" id="noDisponible" value="0" onChange={(e) => {setEstado(e.target.value);}}/>
                         <label class="form-check-label" for="noDisponible">
                             No disponible
                         </label>

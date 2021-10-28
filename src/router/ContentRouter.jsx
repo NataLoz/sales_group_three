@@ -2,10 +2,13 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { NavLink } from 'react-router-dom';
 import '../css/home.scss';
-import { User } from '../components/Content/Users/User';
-import { EditUser } from '../components/Content/Users/EditUser';
-import { Rol } from '../components/Content/Roles/Rol';
 import { Menu } from '../components/Menu/Menu';
+import { ListUser } from '../components/Content/Users/ListUser';
+import { EditUser } from '../components/Content/Users/EditUser';
+import { CreateUser } from "../components/Content/Users/CreateUser";
+import { ListRol } from "../components/Content/Roles/ListRol";
+import { CreateRol } from "../components/Content/Roles/CreateRol";
+import { EditRol } from "../components/Content/Roles/EditRol";
 import Logo from '../images/logo.jpg';
 
 export const ContentRouter = () => {
@@ -64,9 +67,12 @@ export const ContentRouter = () => {
             <div id="content" className="p-4 p-md-5">
                 <Menu />
                 <Switch>
-                    <Route exact path="/home/User" component={User} />
-                    <Route exact path="/home/Rol" component={Rol} />
+                    <Route exact path="/home/User" component={ListUser} />
+                    <Route exact path="/home/CreateUser" component={CreateUser} />
                     <Route exact path="/home/EditUser/:id" component={EditUser} />
+                    <Route exact path="/home/Rol" component={ListRol} />
+                    <Route exact path="/home/CreateRol" component={CreateRol} />
+                    <Route exact path="/home/EditRol/:id" component={EditRol} />
                 </Switch>
             </div>
         </div>

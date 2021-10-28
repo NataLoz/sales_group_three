@@ -65,12 +65,24 @@ export const ContentRouter = () => {
             <div id="content" className="p-4 p-md-5">
                 <Menu />
                 <Switch>
+
                     <Route exact path="/home/User" component={ListUser} />
                     <Route exact path="/home/CreateUser" component={CreateUser} />
                     <Route exact path="/home/EditUser/:id" component={EditUser} />
                     <Route exact path="/home/Rol" component={ListRol} />
+                  
                     <Route exact path="/home/CreateRol" component={CreateRol} />
                     <Route exact path="/home/EditRol/:id" component={EditRol} />
+                      
+                    <Route exact path="/home/Ventas" component={Ventas} />
+                    <Route exact path="/home/AddVentas" component={AddVentas} />
+                    <Route exact path="/home/EditVentas" component={EditVentas} />
+                    <Route exact path="/home/Productos" component={Productos} />
+                    <Route exact path="/home/AddProductos" component={AddProductos} />
+                    <Route exact path="/home/EditProductos/:id" component={EditProductos} />
+                    
+
+                    
                 </Switch>
             </div>
         </div>

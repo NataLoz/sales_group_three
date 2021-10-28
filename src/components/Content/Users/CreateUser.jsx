@@ -1,38 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
-import { useParams } from "react-router-dom";
 import swal from 'sweetalert';
 import axios from 'axios';
 
-export const EditUser = () => {
+export const CreateUser = () => {
     const auth = useAuth();
 
     const [user, setuser] = useState([]);
     const [roles, setrol] = useState([]);
-
-    const { id } = useParams();
-
-    const getUser = async () => {
-        try {
-            const { status, data } = await axios({
-                method: 'GET',
-                url: 'http://localhost:4000/api/ciclo3/user/list/' + id,
-                /* url: `${process.env.EndpointApi}/auth/google/login`, */
-                headers: {
-                    'Authorization': `Bearer ${auth.token}`
-                }
-            });
-            setuser(data.data);
-
-        } catch (error) {
-            swal({
-                title: 'Error',
-                text: error.response.data.msg,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-        }
-    }
 
     const getRoles = async () => {
         try {
@@ -81,8 +56,8 @@ export const EditUser = () => {
         try {
 
             const { status, data } = await axios({
-                method: 'PUT',
-                url: `http://localhost:4000/api/ciclo3/user/edit/${id}`,
+                method: 'POST',
+                url: `http://localhost:4000/api/ciclo3/user/create`,
                 /* url: `${process.env.EndpointApi}/auth/google/login`, */
                 headers: {
                     'Authorization': `Bearer ${auth.token}`
@@ -92,7 +67,7 @@ export const EditUser = () => {
 
             if (status === 201) {
                 return swal({
-                    title: "Actualización exitosa",
+                    title: "Creacion exitosa",
                     text: data.msg,
                     icon: "success",
                     dangerMode: true,
@@ -102,7 +77,7 @@ export const EditUser = () => {
 
             if (status === 404) {
                 return swal({
-                    title: "Problema de actualización",
+                    title: "Problema de cracion",
                     text: data.msg,
                     icon: "error",
                     dangerMode: true,
@@ -121,13 +96,14 @@ export const EditUser = () => {
     }
 
     useEffect(() => {
-        getUser();
         getRoles();
+        setuser();
     }, []);
 
+    
     return (
         <React.Fragment>
-            <h2 className="mb-4">Actualización de Usuarios</h2>
+            <h2 className="mb-4">Creación de Usuarios</h2>
             <hr />
             <div className="card col-md-8 mx-auto">
                 <div className="card-body">
@@ -135,21 +111,21 @@ export const EditUser = () => {
                         <div className="form-row">
                             <div className="form-group col-md-6">
                                 <label htmlFor="email">email</label>
-                                <input name="email" type="email" className="form-control" id="email" value={user.email} onChange={handleChange} />
+                                <input name="email" type="email" className="form-control" id="email" onChange={handleChange} />
                             </div>
                             <div className="form-group col-md-6">
                                 <label htmlFor="user">user</label>
-                                <input name="user" type="text" className="form-control" id="user" value={user.user} onChange={handleChange} />
+                                <input name="user" type="text" className="form-control" id="user" onChange={handleChange} />
                             </div>
                         </div>
                         <div className="form-row">
                             <div className="form-group col-md-6">
                                 <label htmlFor="name">name</label>
-                                <input name="name" type="text" className="form-control" id="name" value={user.name} onChange={handleChange} />
+                                <input name="name" type="text" className="form-control" id="name" onChange={handleChange} />
                             </div>
                             <div className="form-group col-md-6">
                                 <label htmlFor="phone">phone</label>
-                                <input name="phone" type="number" className="form-control" id="phone" value={(user.phone) ? user.phone : ''} onChange={handleChange} />
+                                <input name="phone" type="number" className="form-control" id="phone" onChange={handleChange} />
                             </div>
                         </div>
                         <div className="form-row">
@@ -163,21 +139,20 @@ export const EditUser = () => {
                             </div>
                             <div className="form-group col-md-4">
                                 <label htmlFor="status">estado</label>
-                                <select name="status" id="status" className="form-control" value={user.status} onChange={handleChange}>
+                                <select name="status" id="status" className="form-control" onChange={handleChange}>
                                     <option value="true">Activo</option>
                                     <option value="false">Inactivo</option>
                                 </select>
                             </div>
                             <div className="form-group col-md-4">
-                                <label htmlFor="idGoogleSession">idGoogleSession</label>
-                                <input name="idGoogleSession" type="text" className="form-control" id="idGoogleSession" value={user.idGoogleSession} readOnly onChange={handleChange} />
+                                <label htmlFor="password">Password</label>
+                                <input name="password" type="password" className="form-control" id="password" onChange={handleChange} />
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-primary float-right">Actualizar</button>
+                        <button type="submit" className="btn btn-primary float-right">Guardar</button>
                     </form>
                 </div>
             </div>
         </React.Fragment>
     )
-
 }

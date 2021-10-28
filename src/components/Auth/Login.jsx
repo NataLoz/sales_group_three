@@ -16,18 +16,49 @@ export const Login = () => {
     const auth = useAuth();
 
     const [formLoginValues, handleLoginInputChange] = useForm({
-        lEmail: '',
-        lPassword: ''
+        email: '',
+        password: ''
     });
 
-    const { lEmail, lPassword } = formLoginValues;
+    const { email, password } = formLoginValues;
 
-    const handleLogin = (e) => {
-        e.preventDefault();
+    const handleLogin = async (event) => {
+        event.preventDefault();
 
-        auth.setToken('');
-        auth.setUser({ id: 1, username: '' });
-        history.push('/home/User');
+        try {
+            const { status, data } = await axios({
+                method: 'POST',
+                url: 'http://localhost:4000/api/ciclo3/auth/login',
+                /* url: `${process.env.EndpointApi}/auth/google/login`, */
+                data: {email, password}
+            });
+
+            if (status === 200) {
+                auth.setToken(data.token);
+                auth.setUser({ id: data._id, username: data.name });
+                history.push('/home/User');
+
+            }
+
+        } catch (error) {
+            console.log(error);
+            if (error.response.status === 401) {
+                swal({
+                    title: 'Error',
+                    text: error.response.data.msg,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                swal({
+                    title: 'Error',
+                    text: error.response.data.msg,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+
+        }
 
     }
 
@@ -42,9 +73,6 @@ export const Login = () => {
                     'Authorization': `Bearer ${resp.tokenId}`
                 }
             });
-
-            console.log('status', status);
-            console.log('data', data);
 
             if (status === 200) {
 
@@ -63,11 +91,6 @@ export const Login = () => {
             }
 
         } catch (error) {
-            /* console.log(error, 123);
-            console.log(error.toJSON());
-            console.log(error.response.status);
-            console.log(error.response.data); */
-
             console.log(error);
             if (error.response.status === 401) {
                 swal({
@@ -111,9 +134,9 @@ export const Login = () => {
                                     <input type="text"
                                         className="form-control"
                                         placeholder="Email"
-                                        name="lEmail"
-                                        value={lEmail}
-                                        onChange={handleLoginInputChange}
+                                        name="email"
+                                        value={email}
+                                        onChange={handleLoginInputChange} required
                                     />
 
                                 </div>
@@ -124,9 +147,9 @@ export const Login = () => {
                                     <input type="password"
                                         className="form-control"
                                         placeholder="Contraseña"
-                                        name="lPassword"
-                                        value={lPassword}
-                                        onChange={handleLoginInputChange}
+                                        name="password"
+                                        value={password}
+                                        onChange={handleLoginInputChange} required
                                     />
                                 </div>
                                 <div className="form-group">
@@ -141,7 +164,7 @@ export const Login = () => {
                         </div>
                         <GoogleLogin
                             className="btn form-group"
-                            clientId="55000912305-alve6692sj0jjb6dia5hr7v5o1tqanl0.apps.googleusercontent.com"
+                            clientId={process.env.REACT_APP_IDOAUTH}
                             buttonText="Iniciar sesion con google"
                             onSuccess={responseGoogle}
                             onFailure={responseGoogle}

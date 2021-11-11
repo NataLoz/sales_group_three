@@ -182,6 +182,7 @@ eliminar=(dato)=>{
                   <td>{elemento.nombredelproducto}</td>
                   <td>{elemento.valorunitario}</td>
                   <td>{elemento.estado}</td>
+                  <td>{elemento.acciones}</td>
                   <td><Button color="primary" type="submit" id="editar"
                     onClick={() => this.mostrarModalEditar(elemento)}>Editar</Button></td>{" "}
                   <td><Button color="danger"
@@ -220,17 +221,17 @@ eliminar=(dato)=>{
             </FormGroup>
             
             <FormGroup>
-              <Label></Label>
-              <form name="estado">
-                <b>Estado:</b>&nbsp;&nbsp;&nbsp;
-                <input type="radio"  name="estado"
-                  value="Disponible" onClick={() => this.validarestado} />
-                <label for="activo">Disponible&nbsp;&nbsp;&nbsp;</label>
-                <input type="radio"  name="estado"
-                  value="No disponible" onClick={() => this.validarestado}  />
-                <label for="inactivo">No Disponible</label>
-              </form>
-
+              <Label>Estado</Label>
+              <div class="form-group">
+                <label for="estado" class="col-sm-3 control-label"></label>
+                <div class="col-sm-8">
+                  <select class="form-control" id="estado" name="estado" onChange={this.handleChange} value={this.state.form.estado} required>
+                    <option value="">Seleccione el estado</option>
+                    <option value="Disponible">Disponible</option>
+                    <option value="No Disponible">No Disponible</option>
+                  </select>
+                </div>
+              </div>
             </FormGroup>
 
           </ModalBody>
@@ -272,16 +273,16 @@ eliminar=(dato)=>{
 
             <FormGroup>
               <Label></Label>
-              <form name="estado">
-                <b>Estado:</b>&nbsp;&nbsp;&nbsp;
-                <input type="radio"  name="estado"
-                  value="Disponible" onClick={() => this.validarestado}  />
-                <label for="activo">Disponible&nbsp;&nbsp;&nbsp;</label>
-                <input type="radio"  name="estado"
-                  value="No disponible" onClick={() => this.validarestado}  />
-                <label for="inactivo">No Disponible</label>
-              </form>
-
+              <div class="form-group">
+                <label for="estado" class="col-sm-3 control-label"></label>
+                <div class="col-sm-8">
+                  <select class="form-control" id="estado" name="estado" onChange={this.handleChange} value={this.state.form.estado} required>
+                    <option value="">Seleccione el estado</option>
+                    <option value="Disponible">Disponible</option>
+                    <option value="No Disponible">No Disponible</option>
+                  </select>
+                </div>
+              </div>
             </FormGroup>
 
           </ModalBody>

@@ -1,11 +1,25 @@
 import React from 'react';
+// jQuery
 import './GestionVentas.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
   import {Table, Button, Container,
     Modal, ModalBody, ModalHeader, 
     FormGroup, ModalFooter,
       Label, Input} from 'reactstrap';
+      <>
+<script src="libs/jQuery/jquery.js" charset="utf-8"></script> 
+<script type="text/javascript" src="libs/jQuery/jquery-ui.js" ></script> 
+<script src="libs/bootstrap-date/bootstrap-datepicker.min.js" charset="utf-8"></script> 
 
+
+
+
+{/* estilo */}
+<link rel="stylesheet" href="libs/bootstrap-date/css/bootstrap-datepicker.css"></link>
+<link rel="stylesheet" href="css/jquery-ui.min.css"></link>
+
+</>
 const data=[
     
 ];
@@ -14,13 +28,30 @@ class GestionVentas extends React.Component{
   state = {
     data: data,
     form: {
-      id: "",
-      nombredelproducto: "",
-      valorunitario: "",
-      estado:""
+      idVenta: "",
+      idVendedor: "",
+      vendedor: "",
+      fechaDelaVenta:"",
+      CcCliente:"",
+      cliente:"",
+      valor:"",
+      estado:"",
+      acciones:"",
+      // forms Agregar Venta
+      idProductoVenta:"",
+      productoSeleccionado:"",
+      seleccioneCantidad:"",
+      idVendedorVenta: "",
+      vendedorVenta:"",
+      fechaVenta:"",
+      CcClienteVenta:"",
+      clienteVenta:""
+
     },
     modalInsertar: false,
     modalEditar:false,
+    modalAgregarVenta: false,
+    modalEditarVenta:false
   };
 
 handleChange=e=>{
@@ -28,8 +59,11 @@ this.setState({
   form:{
     ...this.state.form,
     [e.target.name]:e.target.value,
+  
   }
 });
+
+
 
 
 }
@@ -40,12 +74,30 @@ ocultarModalAgregar=()=>{
   this.setState({modalInsertar:false});
 }
 
+
 mostrarModalEditar=(registro)=>{
   this.setState({modalEditar:true, form:registro});
 }
 ocultarModalEditar=()=>{
   this.setState({modalEditar:false});
 }
+
+
+mostrarModalAgregarVenta=()=>{
+  this.setState({modalAgregarVenta:true})
+}
+ocultarModalAgregarVenta=()=>{
+  this.setState({modalAgregarVenta:false})
+}
+
+mostrarModalEditarVenta=(registro)=>{
+  this.setState({modalEditarVenta:true, form:registro});
+}
+ocultarModalEditarVenta=()=>{
+  this.setState({modalEditarVenta:false});
+}
+
+
 
 buscar = function(){
   window.onload=function(){
@@ -77,23 +129,28 @@ buscar = function(){
 }
 }
 
+
+
+// Funciones Gestion de Ventas
 insertar=()=>{
   var valorNuevo={...this.state.form};
-  valorNuevo.id=this.state.data.length+1
+  valorNuevo.idVenta=this.state.data.length+1
+  valorNuevo.idVendedor=this.state.data.length+1
   var lista=this.state.data;
   lista.push(valorNuevo);
   console.log(lista)
   this.setState({data: lista, modalInsertar:false})
 }
-
 editar=(dato)=>{
   var contador=0;
   var lista=this.state.data;
   lista.map((registro)=>{
 
     if(dato.id===registro.id){
-      lista[contador].nombredelproducto=dato.nombredelproducto;
-      lista[contador].valorunitario=dato.valorunitario;
+      lista[contador].vendedor=dato.vendedor;
+      lista[contador].fechaDelaVenta=dato.fechaDelaVenta;
+      lista[contador].CcCliente=dato.CcCliente;
+      lista[contador].valor=dato.valor;
       lista[contador].estado=dato.estado;
     }
     contador++;
@@ -101,6 +158,73 @@ editar=(dato)=>{
 
   this.setState({data:lista , modalEditar:false});
 }
+eliminar=(dato)=>{
+  var opcion=window.confirm('Esta seguro de eliminar el Producto'+ dato.id);
+  if(opcion===true){
+    var contador=0;
+    var lista = this.state.data;
+    lista.map((registro)=>{
+    
+      if(registro.id===dato.id){
+        lista.splice(contador, 1);
+      }
+      contador++;
+    })
+    this.setState({data:lista});
+  }
+}
+
+
+
+// Funciones Agregar Venta
+insertarVenta=()=>{
+  var valorNuevoVenta={...this.state.form};
+  valorNuevoVenta.idProductoVenta=this.state.data.length+1
+  valorNuevoVenta.idVendedorVenta=this.state.data.length+1
+  var lista=this.state.data;
+  lista.push(valorNuevoVenta);
+  console.log(lista)
+  this.setState({data: lista, modalAgregarVenta:false})
+}
+
+editarVenta=(dato)=>{
+  var contador=0;
+  var lista=this.state.data;
+  lista.map((registro)=>{
+
+    if(dato.idProductoVenta===registro.idProductoVenta){
+      lista[contador].productoSeleccionado=dato.productoSeleccionado;
+      lista[contador].seleccioneCantidad=dato.seleccioneCantidad;
+      lista[contador].idVendedorVenta=dato.idVendedorVenta;
+      lista[contador].vendedorVenta=dato.vendedorVenta;
+      lista[contador].fechaVenta=dato.fechaVenta;
+      lista[contador].CcClienteVenta=dato.CcClienteVenta;
+      lista[contador].clienteVenta=dato.clienteVenta;
+ 
+    }
+    contador++;
+  })
+
+  this.setState({data:lista , modalEditarVenta:false});
+}
+
+eliminarVenta=(dato)=>{
+  var opcion=window.confirm('Esta seguro de eliminar el Producto'+ dato.idProductoVenta);
+  if(opcion===true){
+    var contador=0;
+    var lista = this.state.data;
+    lista.map((registro)=>{
+    
+      if(registro.idProductoVenta===dato.idProductoVenta){
+        lista.splice(contador, 1);
+      }
+      contador++;
+    })
+    this.setState({data:lista});
+  }
+}
+
+
 
 validarestado= function(){
   var i=0
@@ -124,34 +248,18 @@ for (i=0; i<validar.length; i++){
 this.setState({data:estado , modalEditar:false});
 }
 
-eliminar=(dato)=>{
-  var opcion=window.confirm('Esta seguro de eliminar el Producto'+ dato.id);
-  if(opcion===true){
-    var contador=0;
-    var lista = this.state.data;
-    lista.map((registro)=>{
-    
-      if(registro.id===dato.id){
-        lista.splice(contador, 1);
-      }
-      contador++;
-    })
-    this.setState({data:lista});
-  }
-}
+
 
   render() {
     return (
       <>
         <Container>
+
         <center>
             <h1>Gestión de Ventas</h1>
+            
         </center>
-          <br />
-          <Button color="primary link"
-            onClick={() => this.mostrarModalAgregar()}> Agregar Nuevo Producto</Button>
 
-          <br></br>
           {/*Boton de buscar  */}
           <br></br>
           <div className="input-group mb-3">
@@ -168,20 +276,31 @@ eliminar=(dato)=>{
           </ul>
 
           <Table >
+
+            {/* Gestion de Ventas */}
             <thead bgcolor="lightgray"><tr>
-              <th>Id</th>
-              <th>Nombre del Producto</th>
-              <th>Valor Unitario</th>
+              <th>Id Venta</th>
+              <th>Id Vendedor</th>
+              <th>Vendedor</th>
+              <th>Fecha de la Venta</th>
+              <th>CC Cliente</th>
+              <th>Cliente</th>
+              <th>Valor </th>
               <th>Estado</th>
               <th>Acciones</th></tr></thead>
 
             <tbody>
               {this.state.data.map((elemento) => (
                 <tr key={elemento.id}>
-                  <td>{elemento.id}</td>
-                  <td>{elemento.nombredelproducto}</td>
-                  <td>{elemento.valorunitario}</td>
+                  <td>{elemento.idVenta}</td>
+                  <td>{elemento.idVendedor}</td>
+                  <td>{elemento.vendedor}</td>
+                  <td>{elemento.fechaDelaVenta}</td>
+                  <td>{elemento.CcCliente}</td>
+                  <td>{elemento.cliente}</td>
+                  <td>{elemento.valor}</td>
                   <td>{elemento.estado}</td>
+                  <td>{elemento.acciones}</td>
                   <td><Button color="primary" type="submit" id="editar"
                     onClick={() => this.mostrarModalEditar(elemento)}>Editar</Button></td>{" "}
                   <td><Button color="danger"
@@ -190,48 +309,129 @@ eliminar=(dato)=>{
               ))}
             </tbody>
           </Table>
-        </Container>
+          <br />
+          <br />
+          <Button color="primary link" id="btnmodal"
+            onClick={() => this.mostrarModalAgregar()}> Gestion de Venta</Button>
+                <br />
 
-        <Modal isOpen={this.state.modalInsertar}>
+
+            {/*Tabla Agregar Venta  */}
+
+
+          <Table >
+            <thead bgcolor="lightgray"><tr>
+              <th>Id Producto</th>
+              <th>Producto Seleccionado</th>
+              <th>Cantidad</th>
+              <th>Id Vendedor</th>
+              <th>Vendedor</th>
+              <th>Fecha de la Venta</th>
+              <th>CC Cliente </th>
+              <th>Cliente</th>
+              <th>Acciones</th></tr></thead>
+
+            <tbody>
+              {this.state.data.map((product) => (
+                <tr key={product.idProductoVenta}>
+                  <td>{product.productoSeleccionado}</td>
+                  <td>{product.seleccioneCantidad}</td>
+                  <td>{product.idVendedorVenta}</td>
+                  <td>{product.vendedorVenta}</td>
+                  <td>{product.fechaVenta}</td>
+                  <td>{product.CcClienteVenta}</td>
+                  <td>{product.clienteVenta}</td>
+   
+                  <td><Button color="primary" type="submit" id="editarVenta"
+                    onClick={() => this.mostrarModalEditarVenta(product)}>Editar</Button></td>{" "}
+                  <td><Button color="danger"
+                    onClick={() => this.eliminarVenta(product)}>Eliminar</Button></td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          <br />
+          <br />
+          <Button color="primary link" id="btnmodal"
+            onClick={() => this.mostrarModalAgregarVenta()}> Agregar Venta</Button>
+          <br />
+
+
+
+
+          <br></br>
+        </Container >
+{/* Modal Boton Gestion Venta */}
+        <Modal id="sand" isOpen={this.state.modalInsertar}>
 
           <ModalHeader>
             <div className=" p-2 bg-primary text-white">
-              <h3 >Agregar Producto</h3>
+              <h3 >Gestion Venta</h3>
             </div>
           </ModalHeader>
 
           <ModalBody>
+ 
             <FormGroup>
-              <Label>Id</Label>
+              <Label>Id Venta</Label>
               <Input className="form-control"
                 readOnly type="text" value={this.state.data.length + 1} />
             </FormGroup>
 
             <FormGroup>
-              <Label>Nombre del Producto</Label>
+              <Label>Id Vendedor</Label>
               <Input className="form-control"
-                name="nombredelproducto" type="text" onChange={this.handleChange} />
+                readOnly type="text" value={this.state.data.length + 1} />
             </FormGroup>
 
             <FormGroup>
-              <Label>Valor Unitario</Label>
+              <Label>Nombre del Vendedor</Label>
               <Input className="form-control"
-                name="valorunitario" type="text" onChange={this.handleChange} />
+                name="vendedor" type="text" onChange={this.handleChange} />
             </FormGroup>
+
             
             <FormGroup>
-              <Label></Label>
-              <form name="estado">
-                <b>Estado:</b>&nbsp;&nbsp;&nbsp;
-                <input type="radio"  name="estado"
-                  value="Disponible" onClick={() => this.validarestado} />
-                <label for="activo">Disponible&nbsp;&nbsp;&nbsp;</label>
-                <input type="radio"  name="estado"
-                  value="No disponible" onClick={() => this.validarestado}  />
-                <label for="inactivo">No Disponible</label>
-              </form>
-
+              <Label>Fecha de Venta</Label>
+              <Input className="form-control"
+                name="fechaDelaVenta" type="text" onChange={this.handleChange} />
             </FormGroup>
+
+            
+
+            <FormGroup>
+              <Label>CC Cliente</Label>
+              <Input className="form-control"
+                name="CcCliente" type="text" onChange={this.handleChange} />
+            </FormGroup>
+
+            <FormGroup>
+              <Label>Nombre del Cliente</Label>
+              <Input className="form-control"
+                name="cliente" type="text" onChange={this.handleChange} />
+            </FormGroup>
+
+            <FormGroup>
+              <Label>Valor</Label>
+              <Input className="form-control"
+                name="valor" type="number" onChange={this.handleChange} />
+            </FormGroup>
+
+            <FormGroup>
+              <Label>Estado</Label>
+              <div class="form-group">
+                <label for="estado" class="col-sm-3 control-label"></label>
+                <div class="col-sm-8">
+                  <select class="form-control" id="estado" name="estado" onChange={this.handleChange} value={this.state.form.estado} required>
+                    <option value="">Seleccione el estado</option>
+                    <option value="Disponible">Disponible</option>
+                    <option value="No Disponible">No Disponible</option>
+                  </select>
+                </div>
+              </div>
+            </FormGroup>
+
+            
 
           </ModalBody>
 
@@ -242,47 +442,75 @@ eliminar=(dato)=>{
 
         </Modal>
 
+        {/* Modal Boton editar Gestion Venta*/}
+
         <Modal isOpen={this.state.modalEditar}>
 
           <ModalHeader>
             <div>
-              <h3>Editar Producto</h3>
+              <h3>Editar Gestion De Venta</h3>
             </div>
           </ModalHeader>
 
           <ModalBody>
             <FormGroup>
-              <Label>Id</Label>
-              <Input className="form-control" readOnly type="text" value={this.state.form.id} />
-            </FormGroup>
-
-            <FormGroup>
-              <Label>Nombre del Producto</Label>
+              <Label>Id Venta</Label>
               <Input className="form-control"
-                name="nombredelproducto" type="text"
-                onChange={this.handleChange} value={this.state.form.nombredelproducto} />
+                readOnly type="text" value={this.state.data.length + 1} />
             </FormGroup>
 
             <FormGroup>
-              <Label>Valor Unitario</Label>
+              <Label>Id del Vendedor</Label>
               <Input className="form-control"
-                name="valorunitario" type="text"
-                onChange={this.handleChange} value={this.state.form.valorunitario} />
+                readOnly type="text" value={this.state.data.length + 1} />
             </FormGroup>
 
             <FormGroup>
-              <Label></Label>
-              <form name="estado">
-                <b>Estado:</b>&nbsp;&nbsp;&nbsp;
-                <input type="radio"  name="estado"
-                  value="Disponible" onClick={() => this.validarestado}  />
-                <label for="activo">Disponible&nbsp;&nbsp;&nbsp;</label>
-                <input type="radio"  name="estado"
-                  value="No disponible" onClick={() => this.validarestado}  />
-                <label for="inactivo">No Disponible</label>
-              </form>
-
+              <Label>Nombre del Vendedor</Label>
+              <Input className="form-control"
+                name="vendedor" type="text" onChange={this.handleChange} />
             </FormGroup>
+
+
+            <FormGroup>
+              <Label>Fecha de Venta</Label>
+              <Input className="form-control"
+                name="fechaDelaVenta" type="text" onChange={this.handleChange} />
+            </FormGroup>
+
+
+            <FormGroup>
+              <Label>CC Cliente</Label>
+              <Input className="form-control"
+                name="CcCliente" type="text" onChange={this.handleChange} />
+            </FormGroup>
+
+            <FormGroup>
+              <Label>Nombre del Cliente</Label>
+              <Input className="form-control"
+                name="cliente" type="text" onChange={this.handleChange} />
+            </FormGroup>
+
+            <FormGroup>
+              <Label>Valor</Label>
+              <Input className="form-control"
+                name="valor" type="number" onChange={this.handleChange} />
+            </FormGroup>
+
+            <FormGroup>
+              <Label>Estado</Label>
+              <div class="form-group">
+                <label for="estado" class="col-sm-3 control-label"></label>
+                <div class="col-sm-8">
+                  <select class="form-control" id="estado" name="estado" onChange={this.handleChange} value={this.state.form.estado} required>
+                    <option value="">Seleccione el estado</option>
+                    <option value="Disponible">Disponible</option>
+                    <option value="No Disponible">No Disponible</option>
+                  </select>
+                </div>
+              </div>
+            </FormGroup>
+
 
           </ModalBody>
 
@@ -292,6 +520,161 @@ eliminar=(dato)=>{
           </ModalFooter>
 
         </Modal>
+
+
+
+{/* Modal  Boton Agregar Venta*/}
+        <Modal isOpen={this.state.modalAgregarVenta}>
+
+          <ModalHeader>
+            <div className=" p-2 bg-primary text-white">
+              <h3 >Agregar Venta</h3>
+            </div>
+          </ModalHeader>
+
+          <ModalBody>
+
+            <FormGroup>
+              <Label>Id del Producto</Label>
+              <Input className="form-control"
+                readOnly type="text" value={this.state.data.length + 1} />
+            </FormGroup>
+      
+            {/* pendiente agregar un select */}
+            <FormGroup>
+              <Label>Producto Seleccionado</Label>
+              <Input className="form-control"
+                name="productoSeleccionado" type="text" onChange={this.handleChange} />
+            </FormGroup>
+
+            {/* pendiente agregar un select */}
+            <FormGroup>
+              <Label>Seleccione la Cantidad</Label>
+              <Input className="form-control"
+                name="seleccioneCantidad" type="number" onChange={this.handleChange} />
+            </FormGroup>
+
+            <FormGroup>
+              <Label>Id del Vendedor</Label>
+              <Input className="form-control"
+                readOnly type="text" name="idVendedorVenta" value={this.state.data.length + 1} />
+            </FormGroup>
+
+  
+            <FormGroup>
+              <Label>Nombre del Vendedor</Label>
+              <Input className="form-control"
+                name="vendedorVenta" type="text" onChange={this.handleChange} />
+            </FormGroup>
+
+
+            <FormGroup>
+              <Label>Fecha de Venta</Label>
+              <Input className="form-control"
+                name="fechaVenta" type="text" onChange={this.handleChange} />
+            </FormGroup>
+
+
+            <FormGroup>
+              <Label>CC Cliente</Label>
+              <Input className="form-control"
+                name="CcClienteVenta" type="text" onChange={this.handleChange} />
+            </FormGroup>
+
+            <FormGroup>
+              <Label>Nombre del Cliente</Label>
+              <Input className="form-control"
+                name="clienteVenta" type="text" onChange={this.handleChange} />
+            </FormGroup>
+
+
+          </ModalBody>
+
+          <ModalFooter>
+            <Button color="primary" onClick={() => this.insertarVenta()}>Agregar</Button>
+            <Button color="danger" onClick={() => this.ocultarModalAgregarVenta()}>Cancelar</Button>
+          </ModalFooter>
+
+        </Modal>
+
+
+        {/* Modal Editar Agregar Venta*/}
+
+
+
+        <Modal isOpen={this.state.modalEditarVenta}>
+
+          <ModalHeader>
+            <div>
+              <h3>Editar Venta</h3>
+            </div>
+          </ModalHeader>
+
+          <ModalBody>
+            <FormGroup>
+              <Label>Id del Producto</Label>
+              <Input className="form-control"
+                readOnly type="text" value={this.state.data.length + 1} />
+            </FormGroup>
+
+            {/* pendiente agregar un select */}
+            <FormGroup>
+              <Label>Producto Seleccionado</Label>
+              <Input className="form-control"
+                name="productoSeleccionado" type="text" onChange={this.handleChange} />
+            </FormGroup>
+  
+            {/* pendiente agregar un select */}
+            <FormGroup>
+              <Label>Seleccione la Cantidad</Label>
+              <Input className="form-control"
+                name="seleccioneCantidad" type="text" onChange={this.handleChange} />
+            </FormGroup>
+
+            <FormGroup>
+              <Label>Id del Vendedor</Label>
+              <Input className="form-control"
+                readOnly type="text" name="idVendedorVenta" value={this.state.data.length + 1} />
+            </FormGroup>
+
+
+            <FormGroup>
+              <Label>Fecha de Venta</Label>
+              <Input className="form-control"
+                name="fechaVenta" type="text" onChange={this.handleChange} />
+            </FormGroup>
+
+
+            <FormGroup>
+              <Label>Nombre del Vendedor</Label>
+              <Input className="form-control"
+                name="vendedorVenta" type="text" onChange={this.handleChange} />
+            </FormGroup>
+
+
+            <FormGroup>
+              <Label>CC Cliente</Label>
+              <Input className="form-control"
+                name="CcClienteVenta" type="text" onChange={this.handleChange} />
+            </FormGroup>
+
+            <FormGroup>
+              <Label>Nombre del Cliente</Label>
+              <Input className="form-control"
+                name="clienteVenta" type="text" onChange={this.handleChange} />
+            </FormGroup>
+
+         
+          </ModalBody>
+
+          <ModalFooter>
+            <Button color="primary" onClick={() => this.editarVenta(this.state.form)} >Editar</Button>
+            <Button color="danger" onClick={() => this.ocultarModalEditarVenta()}>Cancelar</Button>
+          </ModalFooter>
+
+        </Modal>
+
+
 
       </>
     );
